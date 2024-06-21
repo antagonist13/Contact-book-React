@@ -1,8 +1,10 @@
+import LoginForm from "../../components/LoginForm/LoginForm";
 import PageTitle from "../../components/PageTitle/PageTitle";
 
 
 export default function LoginPage() {
     return <div>
-    <PageTitle>Login page</PageTitle>
+        <PageTitle>Please log in</PageTitle>
+        <LoginForm/>
     </div>
 }
