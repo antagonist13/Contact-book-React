@@ -5,7 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import Error from "../../components/Error/Error";
 import css from './/ContactsPage.module.css'
 import { useSelector } from 'react-redux'
-import { selectLoading, selectError } from '../../redux/contacts/contactsSelectors'
+import { selectLoading, selectError } from '../../redux/contacts/selectors'
 
 export default function ContactsPage() {
 
