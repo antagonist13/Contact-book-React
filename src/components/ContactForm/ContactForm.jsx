@@ -4,15 +4,24 @@ import * as Yup from "yup";
 import css from './ContactForm.module.css'
 import { useDispatch } from 'react-redux'
 import { addContact } from "../../redux/contacts/operations";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function ContactForm() {
     const dispatch = useDispatch()
-
+    const newContactSuccessNotify = () => toast.success('New contact has been added!');
+    const newContactErrorNotify = () => toast.error('An error occurred, try again!');
 
     const fieldId = useId();
     const handleSubmit = (values, actions) => {
-        dispatch(addContact(values))
+        dispatch(addContact(values)).unwrap()
+            .then(() => {
+            newContactSuccessNotify();
+            })
+            .catch(() => {
+            newContactErrorNotify();
+            });
         actions.resetForm();
+        
     };
     const UserSchema = Yup.object().shape({
     name: Yup.string()
@@ -61,6 +70,7 @@ export default function ContactForm() {
                 />
             </div>
             <button type="submit"> Add Contact </button>
+            <Toaster position="top-left" reverseOrder={false} />
         </Form>
     </Formik>
     

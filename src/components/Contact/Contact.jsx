@@ -4,8 +4,12 @@ import { IoPerson } from "react-icons/io5";
 import { useState } from 'react';
 import ModalDelete from '../ModalDelete/ModalDelete';
 import ModalEdit from '../ModalEdit/ModalEdit';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Contact({ contacts: { name, id, number } }) {
+  const updateSuccessNotify = () => toast.success('Contact has been edited!');
+  const deleteSuccessNotify = () => toast.success('Contact has been deleted!');
+  const errorNotify = () => toast.success('An error occurred, try again.');
 
     const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   function openEditModal() {
@@ -33,7 +37,18 @@ export default function Contact({ contacts: { name, id, number } }) {
         <button onClick={() => openDeleteModal()} className={css.removeButton}>
           Delete
       </button>
-      <ModalEdit closeModal={closeEditModal} modalIsOpen={editModalIsOpen} id={id} />
-      <ModalDelete closeModal={closeDeleteModal} modalIsOpen={deleteModalIsOpen} id={id} />
+      <ModalEdit closeModal={closeEditModal}
+        modalIsOpen={editModalIsOpen}
+        id={id}
+        contactName={name}
+        contactNumber={number}
+        updateNotify={updateSuccessNotify}
+        errorNotify={errorNotify} />
+      <ModalDelete closeModal={closeDeleteModal}
+        modalIsOpen={deleteModalIsOpen}
+        id={id}
+        deleteSuccessNotify={deleteSuccessNotify}
+        errorNotify={errorNotify} />
+      <Toaster position="top-left" reverseOrder={false} />
     </>
   }

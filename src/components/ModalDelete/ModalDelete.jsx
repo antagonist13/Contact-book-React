@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
 
-export default function ModalDelete({ closeModal, modalIsOpen, id }) {
+export default function ModalDelete({ closeModal, modalIsOpen, id, deleteSuccessNotify, errorNotify }) {
     const dispatch = useDispatch()
     Modal.setAppElement('#root')
     const customStyles = {
@@ -17,7 +17,13 @@ export default function ModalDelete({ closeModal, modalIsOpen, id }) {
     
     }
     const handleDeleteContact = (id) => {
-        dispatch(deleteContact(id))
+        dispatch(deleteContact(id)).unwrap()
+            .then(() => {
+            deleteSuccessNotify();
+            })
+            .catch(() => {
+            errorNotify();
+            });
     }
     return <Modal
         isOpen={modalIsOpen}

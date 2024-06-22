@@ -1,9 +1,12 @@
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { updateContact } from '../../redux/contacts/operations';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import  css  from "./ModalEdit.module.css";
 
-export default function ModalEdit({closeModal, modalIsOpen, id}) {
-    Modal.setAppElement('#root')
+export default function ModalEdit({closeModal, modalIsOpen, id, updateNotify, errorNotify, contactName, contactNumber}) {
+  Modal.setAppElement('#root')
     const customStyles = {
         content: {
             top: '50%',
@@ -15,26 +18,36 @@ export default function ModalEdit({closeModal, modalIsOpen, id}) {
         }
     
   }
+  const UserSchema = Yup.object().shape({
+    name: Yup.string()
+        .min(3, "Мінімум 3 символи!")
+        .max(30, "Максимум 30 символів!")
+        .required("Обов'язково заповнити!"),
+    number: Yup.string()
+        .min(3, "Мінімум 3 символи!")
+        .max(30, "Максимум 30 символів!")
+        .required("Обов'язково заповнити!"),
+  });
+  
       const dispatch = useDispatch()
     
     const handleEditContact = (id, updatedData) => {
-        dispatch(updateContact({ id, updatedData }))
+        dispatch(updateContact({ id, updatedData })).unwrap()
+            .then(() => {
+            updateNotify();
+            })
+            .catch(() => {
+            errorNotify();
+            });
   }
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-      const nameValue = form.elements.name.value;
-      const numberValue = form.elements.number.value;
-    if (nameValue !== "") {
+  const handleSubmit = (values, actions) => {
       handleEditContact(id, {
-        "name": String(nameValue),
-        "number": String(numberValue)
+        "name": values.name,
+        "number": values.number
       });
-      form.reset();
+      actions.resetForm();
       closeModal()
-      return;
-    }
-    alert("Contact name cannot be empty. Enter some text!");
+
   };
 
     return <Modal
@@ -44,11 +57,46 @@ export default function ModalEdit({closeModal, modalIsOpen, id}) {
         contentLabel="Contact editing Modal"
       >
         <button onClick={closeModal}>close</button>
-      <h4>Edit the contact</h4>
-        <form onSubmit={handleSubmit}>
-          <input name="name" type='text'/>
-          <input name="number" type='text'/>
-        <button type="submit">Submit</button>
-    </form>
+      <h4>Edit the contact</h4>  
+      <Formik
+            initialValues={{
+            name: "",
+            number: "",
+            }}
+            validationSchema={UserSchema}
+            onSubmit={handleSubmit}
+            >
+        <Form className={css.form}>
+            <div className={css.formItem}>
+                <label htmlFor={`${id}-name`}>Name</label>
+                <Field className={css.input}
+                    type="text"
+                    name="name"
+                    id={`${id}-name`}
+                    placeholder={contactName}
+                />
+                <ErrorMessage
+                    name="name"
+                    component="span"
+                    className={css.error}
+                />
+            </div>
+             <div className={css.formItem}>
+                <label htmlFor={`${id}-number`}>Number</label>
+                <Field className={css.input}
+                    type="text"
+                    name="number"
+                    id={`${id}-number`}
+                    placeholder={contactNumber}
+                />
+                <ErrorMessage
+                    name="number"
+                    component="span"
+                    className={css.error}
+                />
+            </div>
+            <button type="submit"> Submit </button>
+        </Form>
+    </Formik>
       </Modal>
 }
