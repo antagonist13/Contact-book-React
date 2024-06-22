@@ -12,6 +12,7 @@ const ContactsPage = lazy(() => import("../../pages/ContactsPage/ContactsPage"))
 const RegisterPage = lazy(() => import("../../pages/RegisterPage/RegisterPage"))
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"))
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"))
+const NotFoundPage = lazy(() => import("../../pages/NotFoundPage/NotFoundPage"))
 
 
 export default function App() {
@@ -37,7 +38,7 @@ export default function App() {
           <Route
             path="/login"
             element={
-              <RestrictedRoute component={<LoginPage />} redirectTo="/tasks" />
+              <RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />
             }
           />
           <Route
@@ -46,6 +47,7 @@ export default function App() {
               <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Layout>
