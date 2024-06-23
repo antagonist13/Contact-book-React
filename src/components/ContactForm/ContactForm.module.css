@@ -18,10 +18,22 @@
   width: 280px;
   height: 30px;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 .error {
   font-size: 14px;
   position: absolute;
   top: 67%;
   color: red;
+}
+.submitBtn {
+  height: 30px;
+  width: 120px;
+  border-radius: 4px;
+  padding: 2px 5px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #1c1d20cc;
+  color: white;
 }

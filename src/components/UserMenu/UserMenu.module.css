@@ -7,3 +7,14 @@
 .username {
   font-weight: 700;
 }
+.logOutBtn {
+  height: 30px;
+  width: 70px;
+  border-radius: 4px;
+  padding: 2px 5px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #1c1d20cc;
+  color: white;
+}

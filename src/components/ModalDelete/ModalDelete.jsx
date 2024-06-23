@@ -1,6 +1,8 @@
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
+import css from "./ModalDelete.module.css"
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function ModalDelete({ closeModal, modalIsOpen, id, deleteSuccessNotify, errorNotify }) {
     const dispatch = useDispatch()
@@ -30,10 +32,14 @@ export default function ModalDelete({ closeModal, modalIsOpen, id, deleteSuccess
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Delete contact Modal"
-      >
-        <button onClick={closeModal}>close</button>
-        <h4>Delete the contact?</h4>
-        <button onClick={() => handleDeleteContact(id)}>Yes</button>
-        <button onClick={closeModal}>No</button>
+    >
+        <div className={css.topModal}>
+            <h4 className={css.modalHead} >Delete the contact?</h4>
+            <IoIosCloseCircleOutline onClick={closeModal} className={css.closeIcon} />
+        </div>
+        <form className={css.form}>
+            <button className={css.deleteBtn} onClick={() => handleDeleteContact(id)}>Yes</button>
+            <button className={css.deleteBtn} onClick={closeModal}>No</button>
+        </form>
       </Modal>
 }

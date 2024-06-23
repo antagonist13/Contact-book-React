@@ -1,0 +1,32 @@
+.closeIcon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.topModal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+  margin-bottom: 24px;
+}
+.modalHead {
+  font-size: 20px;
+}
+.deleteBtn {
+  height: 30px;
+  width: 70px;
+  border-radius: 4px;
+  padding: 2px 5px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #1c1d20cc;
+  color: white;
+}
+.form {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: center;
+}

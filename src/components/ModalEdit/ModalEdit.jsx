@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { updateContact } from '../../redux/contacts/operations';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import  css  from "./ModalEdit.module.css";
+import css from "./ModalEdit.module.css";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function ModalEdit({closeModal, modalIsOpen, id, updateNotify, errorNotify, contactName, contactNumber}) {
   Modal.setAppElement('#root')
@@ -55,9 +56,11 @@ export default function ModalEdit({closeModal, modalIsOpen, id, updateNotify, er
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Contact editing Modal"
-      >
-        <button onClick={closeModal}>close</button>
-      <h4>Edit the contact</h4>  
+    >
+        <div className={css.topModal}>
+            <h4 className={css.modalHead}>Edit the contact</h4>
+            <IoIosCloseCircleOutline onClick={closeModal} className={css.closeIcon} />
+        </div>
       <Formik
             initialValues={{
             name: "",
@@ -95,7 +98,7 @@ export default function ModalEdit({closeModal, modalIsOpen, id, updateNotify, er
                     className={css.error}
                 />
             </div>
-            <button type="submit"> Submit </button>
+            <button type="submit" className={css.submitBtn}> Submit </button>
         </Form>
     </Formik>
       </Modal>

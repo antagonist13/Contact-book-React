@@ -2,15 +2,21 @@ import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
+  const loginSuccessNotify = () => toast.success('You have successfully logged in ');
+  const loginErrorNotify = () => toast.error('Something went wrong, try again');
 
   const handleSubmit = (values, actions) => {
-    dispatch(logIn(values));
-    // .unwrap()
-    // .then(data => console.log(data))
-    // .catch(err => console.log(err));
+    dispatch(logIn(values)).unwrap()
+            .then(() => {
+            loginSuccessNotify();
+            })
+            .catch(() => {
+            loginErrorNotify();
+            });
 
     actions.resetForm();
   };
@@ -32,7 +38,8 @@ export default function LoginForm() {
           Password
           <Field type="password" name="password" />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className={css.submitBtn}>Log In</button>
+        <Toaster position="top-left" reverseOrder={false} />
       </Form>
     </Formik>
   );

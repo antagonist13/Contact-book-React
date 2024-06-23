@@ -25,3 +25,27 @@
   top: 67%;
   color: red;
 }
+.modalHead {
+  font-size: 20px;
+}
+.submitBtn {
+  height: 30px;
+  width: 70px;
+  border-radius: 4px;
+  padding: 2px 5px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #1c1d20cc;
+  color: white;
+}
+.closeIcon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.topModal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

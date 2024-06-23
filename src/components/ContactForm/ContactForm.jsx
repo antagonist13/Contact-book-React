@@ -69,7 +69,7 @@ export default function ContactForm() {
                     className={css.error}
                 />
             </div>
-            <button type="submit"> Add Contact </button>
+            <button type="submit" className={css.submitBtn}> Add Contact </button>
             <Toaster position="top-left" reverseOrder={false} />
         </Form>
     </Formik>

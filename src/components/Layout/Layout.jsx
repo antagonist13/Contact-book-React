@@ -5,6 +5,7 @@ export default function Layout({ children }) {
   return (
     <div className={css.container}>
       <AppBar />
+      <hr></hr>
       {children}
     </div>
   );
