@@ -37,9 +37,9 @@ export default function ModalDelete({ closeModal, modalIsOpen, id, deleteSuccess
             <h4 className={css.modalHead} >Delete the contact?</h4>
             <IoIosCloseCircleOutline onClick={closeModal} className={css.closeIcon} />
         </div>
-        <form className={css.form}>
+        <div className={css.form}>
             <button className={css.deleteBtn} onClick={() => handleDeleteContact(id)}>Yes</button>
             <button className={css.deleteBtn} onClick={closeModal}>No</button>
-        </form>
+        </div>
       </Modal>
 }

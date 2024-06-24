@@ -63,8 +63,8 @@ export default function ModalEdit({closeModal, modalIsOpen, id, updateNotify, er
         </div>
       <Formik
             initialValues={{
-            name: "",
-            number: "",
+            name: contactName,
+            number: contactNumber,
             }}
             validationSchema={UserSchema}
             onSubmit={handleSubmit}
@@ -76,7 +76,7 @@ export default function ModalEdit({closeModal, modalIsOpen, id, updateNotify, er
                     type="text"
                     name="name"
                     id={`${id}-name`}
-                    placeholder={contactName}
+                    placeholder="Enter your data..."
                 />
                 <ErrorMessage
                     name="name"
@@ -90,7 +90,7 @@ export default function ModalEdit({closeModal, modalIsOpen, id, updateNotify, er
                     type="text"
                     name="number"
                     id={`${id}-number`}
-                    placeholder={contactNumber}
+                    placeholder="Enter your data..."
                 />
                 <ErrorMessage
                     name="number"
